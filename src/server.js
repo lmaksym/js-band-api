@@ -1,4 +1,5 @@
 const jsonServer = require('json-server')
+const cors = require('cors')
 const server = jsonServer.create()
 const db = require('./db')
 const { auth } = require('./middlewares')
@@ -10,7 +11,7 @@ const middlewares = jsonServer.defaults()
 
 server.use(middlewares)
 server.use(auth)
-
+server.use(cors())
 server.use(jsonServer.bodyParser)
 server.use((req, res, next) => {
   if (req.method === 'POST') {
